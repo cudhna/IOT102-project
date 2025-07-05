@@ -55,8 +55,10 @@
 ![Schematic Diagram](Images/Schematic.png)
 **4. Circuit Diagram**
 ![Circuit Diagram](Images/Circuit.png)
+
 **5. Flowchart**
 ![Flowchart](Images/Flowchart.png)
+
 **6. Interface Design**
 ![Product1](Images/Final_Product1.png)
 ![Product2](Images/Final_Product2.png)
