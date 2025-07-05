@@ -58,3 +58,13 @@
 **5. Flowchart**
 
 **6. Interface Design**
+
+## III. Results Achieved
+- The system has successfully completed the basic functions of monitoring and controlling the warehouse environment:
+  - Continuously reads and monitors the temperature in the warehouse.
+  - Provides visual alerts with LEDs and alarms when the temperature exceeds the limit.
+  - Automatically controls the cooling fan when high temperature is detected.
+  - Turns off the warning systems when the temperature returns to a safe level.
+  - Integrates manual control for devices (fan, alarm, light) via buttons and a mobile phone app.
+  - Communicates through the Serial port to check the temperature and device status directly.
+  - The system ensures the goal of demonstrating, in a clear and understandable way, how to monitor and protect the pharmaceutical warehouse in real life.
