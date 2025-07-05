@@ -58,7 +58,7 @@
 
 **5. Flowchart**
 <p align="center">
-  <img src="Images/Flowchart.png" width="80%" />
+  <img src="Images/Flowchart.jpg" width="80%" />
 </p>
 
 **6. Interface Design**
