@@ -50,7 +50,7 @@
 - 1 kΩ Resistor
 
 **2. Functional Block Diagram**
-
+![Block Diagram](Images/Block_Diagram.png)
 **3. Schematic Diagram**
 
 **4. Circuit Diagram**
