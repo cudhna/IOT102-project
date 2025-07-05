@@ -60,10 +60,12 @@
 ![Flowchart](Images/Flowchart.png)
 
 **6. Interface Design**
-![Product1](Images/Final_Product1.png)
-![Product2](Images/Final_Product2.png)
-![Product3](Images/Final_Product3.png)
-![Product4](Images/Final_Product4.png)
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+  <img src="Images/Final_Product1.png" width="45%" />
+  <img src="Images/Final_Product2.png" width="45%" />
+  <img src="Images/Final_Product3.png" width="45%" />
+  <img src="Images/Final_Product4.png" width="45%" />
+</div>
 ## III. Results Achieved
 - The system has successfully completed the basic functions of monitoring and controlling the warehouse environment:
   - Continuously reads and monitors the temperature in the warehouse.
