@@ -52,13 +52,16 @@
 **2. Functional Block Diagram**
 ![Block Diagram](Images/Block_Diagram.png)
 **3. Schematic Diagram**
-
+![Schematic Diagram](Images/Schematic.png)
 **4. Circuit Diagram**
-
+![Circuit Diagram](Images/Circuit.png)
 **5. Flowchart**
-
+![Flowchart](Images/Flowchart)
 **6. Interface Design**
-
+![Product](Images/Final_Product1.png)
+![Product](Images/Final_Product2.png)
+![Product](Images/Final_Product3.png)
+![Product](Images/Final_Product4.png)
 ## III. Results Achieved
 - The system has successfully completed the basic functions of monitoring and controlling the warehouse environment:
   - Continuously reads and monitors the temperature in the warehouse.
