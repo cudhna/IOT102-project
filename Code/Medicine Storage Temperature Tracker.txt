@@ -1,0 +1,174 @@
+#include <LiquidCrystal.h>
+#include <IRremote.h>
+
+// Declare LCD (RS, E, D4, D5, D6, D7)
+LiquidCrystal lcd(9, 8, 7, 6, 5, 10);
+
+// Buzzer and LED for warning
+#define BUZZER 12
+#define LED_RED 13 // Only one LED
+
+// LM35 temperature sensor
+#define TEMP_SENSOR A0
+
+// IR sensor
+#define IR_SENSOR 4
+
+// MOSFET to control the fan
+#define FAN_PIN 11
+
+// Declare the IR object
+IRrecv irrecv(IR_SENSOR); 
+decode_results results;
+
+// State variables
+unsigned long buzzerStart = 0;
+bool buzzerOn = false;
+bool fanOn = false;
+bool manualFanControl = false; // Manual fan control
+bool manualLedControl = false; // Manual LED control
+bool isLedBlinking = false;    // LED blinks when temperature is too high
+unsigned long lastLedToggle = 0;
+const int LED_BLINK_INTERVAL = 100; // Blinks every 100ms
+bool highTempDetected = false;
+
+void setup() {
+  lcd.begin(16, 2); // Initialize LCD
+
+  // Set pin modes for output
+  pinMode(BUZZER, OUTPUT); 
+  pinMode(LED_RED, OUTPUT); 
+  pinMode(FAN_PIN, OUTPUT);
+
+  // Initialize Serial communication and IR receiver
+  Serial.begin(9600); 
+  irrecv.enableIRIn(); // Start IR receiver
+
+  // Display startup message
+  lcd.clear();
+  lcd.setCursor(0, 0); 
+  lcd.print("Starting..."); 
+  delay(2000);
+
+  // Test LED during startup
+  digitalWrite(LED_RED, HIGH); 
+  delay(1000); 
+  digitalWrite(LED_RED, LOW);
+}
+ 
+void loop() {
+  // Receive signals from remote control
+  if (irrecv.decode(&results)) {
+    unsigned long irCode = results.value; 
+    Serial.print("IR Code: 0x"); 
+    Serial.println(irCode, HEX);
+
+    // Switch case to handle different IR codes
+    switch (irCode) {
+      case 0xFFA25D: // Power button - Turn on the buzzer for 3 seconds
+        digitalWrite(BUZZER, HIGH);
+        buzzerStart = millis(); 
+        buzzerOn = true; 
+        break;
+
+      case 0xFF30CF: // Button 3 - Turn on fan manually
+        digitalWrite(FAN_PIN, HIGH);
+        fanOn = true; 
+        manualFanControl = true; 
+        break;
+
+      case 0xFF18E7: // Button 4 - Turn off fan
+        digitalWrite(FAN_PIN, LOW); 
+        fanOn = false; 
+        manualFanControl = false; 
+        break;
+
+      case 0xFF7A85: // Button 1 - Turn on LED
+        digitalWrite(LED_RED, HIGH); 
+        manualLedControl = true; 
+        isLedBlinking = false; 
+        break;
+
+      case 0xFF10EF: // Button 2 - Turn off LED
+        digitalWrite(LED_RED, LOW); 
+        manualLedControl = true; 
+        isLedBlinking = false; 
+        break;
+
+      case 0xFF38C7: // Button 5 - LED blinking mode
+        manualLedControl = true; 
+        isLedBlinking = true; 
+        lastLedToggle = millis(); 
+        break;
+    }
+
+    irrecv.resume(); 
+    delay(100); 
+  }
+
+  // Get temperature reading
+  float temperature = getTemperature();
+  Serial.print("Temp: "); 
+  Serial.print(temperature); 
+  Serial.println(" C");
+
+  // Check temperature to control fan, buzzer, and LED
+  if (temperature > 30 && !highTempDetected && !manualLedControl) { 
+    highTempDetected = true;
+    isLedBlinking = true; 
+    if (!buzzerOn) {
+      digitalWrite(BUZZER, HIGH); 
+      buzzerStart = millis(); 
+      buzzerOn = true;
+    }
+    if (!fanOn) { 
+      digitalWrite(FAN_PIN, HIGH); 
+      fanOn = true; 
+    }
+  }
+
+  // Handle LED blinking automatically
+  if (isLedBlinking && !manualLedControl) {
+    if (millis() - lastLedToggle >= LED_BLINK_INTERVAL) { 
+      digitalWrite(LED_RED, !digitalRead(LED_RED)); 
+      lastLedToggle = millis();
+    }
+  }
+
+  // Turn off the fan if the temperature is below 30°C and not manually controlled
+  if (temperature <= 30 && !manualFanControl) {
+    digitalWrite(FAN_PIN, LOW); 
+    fanOn = false;
+  }
+
+  // Turn off the buzzer after 3 seconds
+  if (buzzerOn && millis() - buzzerStart >= 3000) { 
+    digitalWrite(BUZZER, LOW); 
+    buzzerOn = false; 
+    Serial.println("Buzzer off!");
+  }
+
+  // Update LCD display
+  static unsigned long lastLCDUpdate = 0; 
+  if (millis() - lastLCDUpdate >= 1000) {
+    lcd.clear(); 
+    lcd.setCursor(0, 0); 
+    lcd.print("Temp: "); 
+    lcd.print(temperature); 
+    lcd.print(" C");
+    lcd.setCursor(0, 1); 
+    lcd.print("Fan: "); 
+    lcd.print(fanOn ? "ON " : "OFF");
+    lastLCDUpdate = millis();
+  }
+
+  delay(100);
+}
+
+// Read temperature from the LM35 sensor
+float getTemperature() {
+  int rawValue = analogRead(TEMP_SENSOR); 
+  float voltage = rawValue * 5.0 / 1023.0; // Convert ADC value to voltage 
+  float temperature = (voltage - 0.5) * 100.0; // Convert voltage to Celsius 
+  return temperature;
+}
