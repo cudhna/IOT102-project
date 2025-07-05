@@ -21,9 +21,9 @@
 
 **3. System Functions**
 - Read temperature data from the LM35 sensor and send it to Arduino.
--Display temperature on the LCD 16x2, and the mobile app to monitor directly.
--Transmit data to the Serial Monitor for checking on the computer.
--Alert when the temperature exceeds the limit:
+- Display temperature on the LCD 16x2, and the mobile app to monitor directly.
+- Transmit data to the Serial Monitor for checking on the computer.
+- Alert when the temperature exceeds the limit:
   - When the temperature ≥ 30°C:
     - Turn on the fan using the Fan Module (Mosfet).
     - Turn on the warning LED to signal high temperature.
@@ -36,3 +36,25 @@
 
 ## II. Content
 **1. Components (Hardware Required)**
+- Arduino Uno R3
+- 5V Fan
+- Temperature Sensor [LM35]
+- Piezo Buzzer
+- Red LED
+- IR Sensor
+- Bluetooth Module HC-05
+- 10k Ω Potentiometer
+- LCD 16x2
+- Transistor
+- 330 Ω Resistor
+- 1 kΩ Resistor
+
+**2. Functional Block Diagram**
+
+**3. Schematic Diagram**
+
+**4. Circuit Diagram**
+
+**5. Flowchart**
+
+**6. Interface Design**
