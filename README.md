@@ -57,7 +57,9 @@
 ![Circuit Diagram](Images/Circuit.png)
 
 **5. Flowchart**
-![Flowchart](Images/Flowchart.png)
+<p align="center">
+  <img src="Images/Flowchart.png" width="80%" />
+</p>
 
 **6. Interface Design**
 <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
