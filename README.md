@@ -56,12 +56,12 @@
 **4. Circuit Diagram**
 ![Circuit Diagram](Images/Circuit.png)
 **5. Flowchart**
-![Flowchart](Images/Flowchart)
+![Flowchart](Images/Flowchart.png)
 **6. Interface Design**
-![Product](Images/Final_Product1.png)
-![Product](Images/Final_Product2.png)
-![Product](Images/Final_Product3.png)
-![Product](Images/Final_Product4.png)
+![Product1](Images/Final_Product1.png)
+![Product2](Images/Final_Product2.png)
+![Product3](Images/Final_Product3.png)
+![Product4](Images/Final_Product4.png)
 ## III. Results Achieved
 - The system has successfully completed the basic functions of monitoring and controlling the warehouse environment:
   - Continuously reads and monitors the temperature in the warehouse.
