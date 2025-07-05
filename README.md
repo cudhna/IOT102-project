@@ -33,5 +33,6 @@
   - Use the Smartphone connected to the HC-05 Bluetooth to:
     - Turn on/off the fan manually if needed.
     - Turn off the alarm if the warning has been acknowledged.
+
 ##II. Content
 **1. Components (Hardware Required)
