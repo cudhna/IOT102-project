@@ -68,6 +68,7 @@
   <img src="Images/Final_Product3.png" width="45%" />
   <img src="Images/Final_Product4.png" width="45%" />
 </div>
+
 ## III. Results Achieved
 - The system has successfully completed the basic functions of monitoring and controlling the warehouse environment:
   - Continuously reads and monitors the temperature in the warehouse.
